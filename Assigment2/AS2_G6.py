@@ -5,6 +5,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, cohen_kappa_score
 from sklearn.preprocessing import MinMaxScaler
 import numpy as np
+import joblib
 
 # %% Load dataset and create train-test sets
 data = load_wine()
@@ -19,8 +20,13 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.8, random_
 regr = MLPClassifier(hidden_layer_sizes=(1000,1000,1000),random_state=42, max_iter=500)
 regr.fit(X_train, y_train)
 
+#Safe Model
+model_filename = 'mlp_model.pkl'
+joblib.dump(regr, model_filename)
+
 # %% Get model predictions
 y_pred = regr.predict(X_test)
+np.savetxt('y_pred_Group6_ass2_mlp.txt',y_pred,delimiter=',',fmt='%.0f')
 
 # %% Compute classification metrics
 acc_score = accuracy_score(y_test, y_pred)
@@ -28,4 +34,3 @@ print("Accuracy: {:.3f}".format(acc_score))
 kappa = cohen_kappa_score(y_test, y_pred)
 print("Kappa Score: {:.3f}".format(kappa))
 
-np.savetxt('y_pred_Group6_ass2_mlp.txt',y_pred,delimiter=',',fmt='%.0f')

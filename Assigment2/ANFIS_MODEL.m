@@ -112,5 +112,10 @@ Y_pred_final_labels = Y_pred_final_labels - 1;
 class_report_final = classperf(Y_test, Y_pred_final_labels);
 fprintf('Final Accuracy: %4.3f \n', class_report_final.CorrectRate);
 dateiname = 'y_pred_Group6_ass2_anfis.txt';
+
 dlmwrite(dateiname, Y_pred_final_labels, 'delimiter', ',', 'precision', '%.0f');
+
+writeFIS(anfis_model_0_vs_all, 'anfis_model_0_vs_all.fis');
+writeFIS(anfis_model_1_vs_all, 'anfis_model_1_vs_all.fis');
+writeFIS(anfis_model_2_vs_all, 'anfis_model_2_vs_all.fis');
 
