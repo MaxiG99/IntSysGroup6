@@ -72,6 +72,17 @@ plt.show()
 # Save Model
 import joblib
 
-model_filename = "MLP.pkl"
-joblib.dump(model, model_filename)
+model_filename = "Project/Models/MLP_q3.pkl"
+path= '/Users/HP Spectre/OneDrive - student.kit.edu/uni/Master/Lissabon Kurse/Intelligent Systems/IntSysGroup6/'
 
+joblib.dump(model, path+model_filename)
+# %%
+
+full_prediction_q3 = model.predict(X)
+results_qf = pd.DataFrame({'q3_pred': full_prediction_q3.flatten()})
+
+# Save the predictions to a CSV file
+results_filename = "Project/saved_pred/q3_pred.csv"
+
+results_qf.to_csv(path+results_filename, index=False)
+# %%
