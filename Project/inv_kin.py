@@ -34,7 +34,7 @@ model = tf.keras.Sequential([
 
 model.compile(loss='mean_squared_error',
               optimizer=optimizers.Adam(0.0001))
-model.summary()
+
 
 
 # %%
@@ -64,6 +64,7 @@ print("MAE Absolute: " ,mean_absolute_error(y_test, y_pred))
 y_pred = scaler_Y.inverse_transform(y_pred)
 y_test = scaler_Y.inverse_transform(y_test)
 print("MAE in deg ",math.degrees(mean_absolute_error(y_test, y_pred)))
+
 
 plt.show()
 # %%
