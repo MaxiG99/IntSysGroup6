@@ -12,7 +12,7 @@ path = '/Users/HP Spectre/OneDrive - student.kit.edu/uni/Master/Lissabon Kurse/I
 
 data = pd.read_csv(path+'Project/data/robot_inverse_kinematics_dataset.csv')
 X = data.iloc[:,6:].to_numpy()
-y = data.iloc[:,0:6].to_numpy()
+y = data.iloc[:,2:3].to_numpy()
 scaler_X = MinMaxScaler()
 scaler_Y = MinMaxScaler()
 X = scaler_X.fit_transform(X)
@@ -28,7 +28,7 @@ model = tf.keras.Sequential([
         layers.Dense(100, activation='relu'),
         layers.Dropout(0.1),
         layers.Dense(100, activation='relu'),
-        layers.Dense(6)
+        layers.Dense(1)
 ])
 
 
@@ -51,7 +51,7 @@ history = model.fit(
           y_train,
           validation_split=0.2,
           verbose=1,
-          epochs=50,
+          epochs=100,
           callbacks=[early_stopping])
 
 # %%
@@ -65,6 +65,13 @@ y_pred = scaler_Y.inverse_transform(y_pred)
 y_test = scaler_Y.inverse_transform(y_test)
 print("MAE in deg ",math.degrees(mean_absolute_error(y_test, y_pred)))
 
+ranges_joints = [330, 220,180, 320,240,360]
 
 plt.show()
 # %%
+# Save Model
+import joblib
+
+model_filename = "MLP.pkl"
+joblib.dump(model, model_filename)
+
