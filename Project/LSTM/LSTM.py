@@ -4,7 +4,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import MinMaxScaler
 import tensorflow as tf
 from matplotlib import pyplot as plt
-from sklearn.metrics import mean_absolute_error
+from sklearn.metrics import mean_absolute_error, r2_score
 import math
 
 
@@ -56,6 +56,8 @@ print(mean_absolute_error(y_test, y_pred))
 y_pred = scaler_Y.inverse_transform(y_pred)
 y_test = scaler_Y.inverse_transform(y_test)
 print(math.degrees(mean_absolute_error(y_test, y_pred)))
+r2 = r2_score(y_test, y_pred)
+print("R-squared (R2) Score:", r2*100)
 
 plt.show()
 # %%
